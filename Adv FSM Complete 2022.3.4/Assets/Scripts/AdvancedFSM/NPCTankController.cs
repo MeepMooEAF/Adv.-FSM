@@ -69,24 +69,52 @@ public class NPCTankController : AdvancedFSM
         PatrolState patrol = new PatrolState(waypoints);
         patrol.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
         patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        patrol.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
+        patrol.AddTransition(Transition.Bored, FSMStateID.Dancing);
+        patrol.AddTransition(Transition.SensedPlayer, FSMStateID.Camping);
 
         ChaseState chase = new ChaseState(waypoints);
         chase.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
         chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
         chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        chase.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
 
         AttackState attack = new AttackState(waypoints);
         attack.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
         attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
         attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        attack.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
 
         DeadState dead = new DeadState();
         dead.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+
+        BoredState bored = new BoredState();
+        bored.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
+        bored.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
+        bored.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+        bored.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+
+        /*DamagedState damaged = new DamagedState();
+        damaged.AddTransition(Transition.FoundRestArea, FSMStateID.Healing);
+        damaged.AddTransition(Transition.NoHealth, FSMStateID.Dead); */
+
+        HealState heal = new HealState();
+        heal.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
+
+        CampState camp = new CampState();
+        camp.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        camp.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+        camp.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
+        camp.AddTransition(Transition.LowHealth, FSMStateID.Retreating);       
 
         AddFSMState(patrol);
         AddFSMState(chase);
         AddFSMState(attack);
         AddFSMState(dead);
+        AddFSMState(bored);
+        //AddFSMState(damaged);
+        AddFSMState(heal);
+        AddFSMState(camp);
     }
 
     /// <summary>

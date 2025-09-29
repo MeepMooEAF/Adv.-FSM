@@ -6,11 +6,11 @@ public class DeadState : FSMState
     public DeadState() 
     {
         stateID = FSMStateID.Dead;
+        health = 0;
     }
 
     public override void Reason(Transform player, Transform npc)
     {
-
     }
 
     public override void Act(Transform player, Transform npc)
