@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int CurrentHealth { get; private set; }
 
     [Header("UI")]
-    [SerializeField] private Slider healthBar; // drag your HealthBar here in Inspector
+    [SerializeField] private Slider healthBar;
 
     private bool isDead;
 
