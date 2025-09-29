@@ -1,26 +1,35 @@
 using UnityEngine;
+using UnityEngine.UI;  // for Slider
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
     public int CurrentHealth { get; private set; }
+
+    [Header("UI")]
+    [SerializeField] private Slider healthBar; // drag your HealthBar here in Inspector
+
     private bool isDead;
 
     void Awake()
     {
         CurrentHealth = maxHealth;
         isDead = false;
+
+        if (healthBar)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = maxHealth;
+        }
     }
 
-    // Bullets already destroy themselves on collision (see Bullet.cs),
-    // so we only need to read damage here before the bullet disappears.
     void OnCollisionEnter(Collision collision)
     {
         if (isDead) return;
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            int dmg = 50; // default if Bullet component not found
+            int dmg = 50; 
             var b = collision.gameObject.GetComponent<Bullet>();
             if (b) dmg = b.damage;
 
@@ -31,7 +40,12 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         if (isDead) return;
+
         CurrentHealth -= amount;
+        if (CurrentHealth < 0) CurrentHealth = 0;
+
+        if (healthBar) healthBar.value = CurrentHealth;
+
         if (CurrentHealth <= 0)
         {
             Die();
@@ -42,12 +56,12 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        // Optional: freeze player controls/motion
         var rb = GetComponent<Rigidbody>();
         if (rb) rb.velocity = Vector3.zero;
+
         var controller = GetComponent<PlayerTankController>();
         if (controller) controller.enabled = false;
 
-        GameManager.Instance.ShowDeathScreen(); // implemented in Step 2
+        GameManager.Instance.ShowDeathScreen();
     }
 }
