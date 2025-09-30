@@ -7,27 +7,30 @@ public class HealState : FSMState
     public HealState() 
     {
         stateID = FSMStateID.Healing;
-        timer = 0;
         maxHealth = 100;
         healPerSecond = 5f;
+        timer = 0;
     }
 
     public override void Reason(Transform player, Transform npc)
     {
-       /* if (health >= maxHealth)
+        if (npc.GetComponent<NPCTankController>().health >= maxHealth)
         {
-            health = maxHealth;
+            npc.GetComponent<NPCTankController>().health = maxHealth;
+            npc.GetComponent<NPCTankController>().invincible = false;
             Debug.Log("Switch to Patrol state");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.LostPlayer);
-        } */
+        } 
     }
 
     public override void Act(Transform player, Transform npc)
     {
-      /*  if (timer > 1)
+        npc.GetComponent<NPCTankController>().invincible = true;
+        timer += Time.deltaTime;
+        if (timer > .5f)
         {
-            health += Mathf.CeilToInt(healPerSecond);
+            npc.GetComponent<NPCTankController>().health += Mathf.CeilToInt(healPerSecond);
             timer = 0;
-        } */
+        }
     }
 }

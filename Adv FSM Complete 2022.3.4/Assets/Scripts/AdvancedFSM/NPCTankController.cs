@@ -4,7 +4,8 @@ using System.Collections;
 public class NPCTankController : AdvancedFSM 
 {
     public GameObject Bullet;
-    private int health;
+    public int health;
+    public bool invincible;
 
     // We overwrite the deprecated built-in `rigidbody` variable.
     new private Rigidbody rigidbody;
@@ -13,7 +14,7 @@ public class NPCTankController : AdvancedFSM
     protected override void Initialize()
     {
         health = 100;
-
+        invincible = false;
         elapsedTime = 0.0f;
         shootRate = 2.0f;
 
@@ -51,11 +52,6 @@ public class NPCTankController : AdvancedFSM
     public void SetTransition(Transition t) 
     { 
         PerformTransition(t); 
-    }
-
-    public void CheckHealth() //Incomplete
-    {
-        //function to check health here
     }
 
     private void ConstructFSM()
@@ -135,14 +131,14 @@ public class NPCTankController : AdvancedFSM
     void OnCollisionEnter(Collision collision)
     {
         //Reduce health
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet" && !invincible)
         {
             health -= 25;
 
             if (health <= 30)
             { 
-            Debug.Log("Switch to Damaged State");
-            SetTransition(Transition.LowHealth);
+                Debug.Log("Switch to Damaged State");
+                SetTransition(Transition.LowHealth);
             }
 
             if (health <= 0)
