@@ -53,6 +53,11 @@ public class NPCTankController : AdvancedFSM
         PerformTransition(t); 
     }
 
+    public void CheckHealth() //Incomplete
+    {
+        //function to check health here
+    }
+
     private void ConstructFSM()
     {
         //Get the list of points

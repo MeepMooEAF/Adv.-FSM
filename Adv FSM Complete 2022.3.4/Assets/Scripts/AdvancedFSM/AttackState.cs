@@ -35,9 +35,9 @@ public class AttackState : FSMState
         {
             Debug.Log("Switch to Patrol State");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.LostPlayer);
-        }  
+        }
 
-        if (health >= 30)
+        npc.GetComponent<NPCTankController>().CheckHealth(); //Incomplete
         {
             Debug.Log("Switch to Damaged state");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.LowHealth);
