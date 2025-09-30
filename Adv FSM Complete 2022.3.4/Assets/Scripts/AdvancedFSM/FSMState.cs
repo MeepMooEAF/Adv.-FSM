@@ -31,6 +31,7 @@ public abstract class FSMState
     protected float healPerSecond;
     protected int maxHealth;
     protected int health = 100;
+    protected GameObject VacationHome;
 
     public void AddTransition(Transition transition, FSMStateID id)
     {

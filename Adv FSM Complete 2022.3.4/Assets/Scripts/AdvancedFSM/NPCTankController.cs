@@ -72,6 +72,7 @@ public class NPCTankController : AdvancedFSM
         patrol.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
         patrol.AddTransition(Transition.Bored, FSMStateID.Dancing);
         patrol.AddTransition(Transition.SensedPlayer, FSMStateID.Camping);
+        patrol.AddTransition(Transition.VacationTime, FSMStateID.Vacation);
 
         ChaseState chase = new ChaseState(waypoints);
         chase.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
@@ -105,7 +106,11 @@ public class NPCTankController : AdvancedFSM
         camp.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         camp.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
         camp.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
-        camp.AddTransition(Transition.LowHealth, FSMStateID.Retreating);       
+        camp.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
+
+        OffDutyState vacation = new OffDutyState();
+        vacation.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        vacation.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
 
         AddFSMState(patrol);
         AddFSMState(chase);
@@ -115,6 +120,7 @@ public class NPCTankController : AdvancedFSM
         AddFSMState(damaged);
         AddFSMState(heal);
         AddFSMState(camp);
+        AddFSMState(vacation);
     }
 
     /// <summary>

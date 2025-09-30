@@ -21,6 +21,7 @@ public enum Transition
     FoundRestArea,
     Bored,
     SensedPlayer,
+    VacationTime,
 }
 
 public enum FSMStateID
@@ -34,6 +35,7 @@ public enum FSMStateID
     Retreating,
     Dancing,
     Camping,
+    Vacation,
 }
 
 public class AdvancedFSM : FSM 

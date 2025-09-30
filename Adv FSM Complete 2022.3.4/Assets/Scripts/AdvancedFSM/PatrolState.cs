@@ -10,7 +10,8 @@ public class PatrolState : FSMState
 
         curRotSpeed = 1.0f;
         curSpeed = 100.0f;
-        timer = 0;
+        //randomizing starting time so they don't all switch to bored or off-duty at the same time
+        timer = Random.Range(0, 4); 
     }
 
     public override void Reason(Transform player, Transform npc)
@@ -36,12 +37,27 @@ public class PatrolState : FSMState
         }
 
         timer += Time.deltaTime;
-        if (timer > 3)
+        if (timer == 5) //gamble here
         {
-            Debug.Log("Switch to Bored State");
-            npc.GetComponent<NPCTankController>().SetTransition(Transition.Bored);
+            int gamba = Random.Range(0, 5);
+            if (gamba >= 3)
+            {
+                Debug.Log("Switch to Bored State");
+                npc.GetComponent<NPCTankController>().SetTransition(Transition.Bored);
+            }
         }
-
+        if (timer > 10)
+        {
+            timer = 0;
+            int gamba = Random.Range(0, 10);
+            if (gamba > 8)
+            {
+                //occupied is true (some variable to stop multiple tanks from going offduty)
+                Debug.Log("Switch to OffDuty State");
+                npc.GetComponent<NPCTankController>().SetTransition(Transition.VacationTime);
+            }
+            
+        }
 
     }
 
