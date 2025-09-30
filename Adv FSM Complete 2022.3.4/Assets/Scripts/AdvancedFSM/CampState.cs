@@ -32,12 +32,6 @@ public class CampState : FSMState
             }
         }
 
-        npc.GetComponent<NPCTankController>().CheckHealth(); //Incomplete
-        {
-            Debug.Log("Switch to Damaged state");
-            npc.GetComponent<NPCTankController>().SetTransition(Transition.LowHealth);
-        }
-
     }
 
     public override void Act(Transform player, Transform npc)

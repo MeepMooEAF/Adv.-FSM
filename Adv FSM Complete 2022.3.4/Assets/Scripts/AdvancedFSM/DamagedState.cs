@@ -20,12 +20,6 @@ public class DamagedState : FSMState
             Debug.Log("Switch to Heal state");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.FoundRestArea);
         }
-
-        if (health <= 0)
-        {
-            Debug.Log("Switch to Dead state");
-            npc.GetComponent<NPCTankController>().SetTransition(Transition.NoHealth);
-        }
     }
 
     public override void Act(Transform player, Transform npc)

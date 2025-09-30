@@ -14,20 +14,20 @@ public class HealState : FSMState
 
     public override void Reason(Transform player, Transform npc)
     {
-        if (health >= maxHealth)
+       /* if (health >= maxHealth)
         {
             health = maxHealth;
             Debug.Log("Switch to Patrol state");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.LostPlayer);
-        }
+        } */
     }
 
     public override void Act(Transform player, Transform npc)
     {
-        if (timer > 1)
+      /*  if (timer > 1)
         {
             health += Mathf.CeilToInt(healPerSecond);
             timer = 0;
-        }
+        } */
     }
 }

@@ -30,12 +30,6 @@ public class PatrolState : FSMState
             npc.GetComponent<NPCTankController>().SetTransition(Transition.SensedPlayer);
         }
 
-        npc.GetComponent<NPCTankController>().CheckHealth(); //Incomplete
-        {
-            Debug.Log("Switch to Damaged state");
-            npc.GetComponent<NPCTankController>().SetTransition(Transition.LowHealth);
-        }
-
         timer += Time.deltaTime;
         if (timer == 5) //gamble here
         {
