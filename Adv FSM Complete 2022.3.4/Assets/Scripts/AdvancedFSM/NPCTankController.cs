@@ -129,10 +129,10 @@ public class NPCTankController : AdvancedFSM
             health -= 25;
 
             if (health <= 30)
-            (
-                Debug.Log("Switch to Damaged State");
-                SetTransition(Transition.LowHealth);
-            )
+            { 
+            Debug.Log("Switch to Damaged State");
+            SetTransition(Transition.LowHealth);
+            }
 
             if (health <= 0)
             {

@@ -8,7 +8,6 @@ public class HealState : FSMState
     {
         stateID = FSMStateID.Healing;
         timer = 0;
-        health = npc.health;
         maxHealth = 100;
         healPerSecond = 5f;
     }
@@ -17,7 +16,7 @@ public class HealState : FSMState
     {
         if (health >= maxHealth)
         {
-            npc.health = maxHealth;
+            health = maxHealth;
             Debug.Log("Switch to Patrol state");
             npc.GetComponent<NPCTankController>().SetTransition(Transition.LostPlayer);
         }
