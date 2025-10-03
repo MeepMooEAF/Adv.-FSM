@@ -90,19 +90,24 @@ public class NPCTankController : AdvancedFSM
         DeadState dead = new DeadState();
         dead.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
+        //CS
         BoredState bored = new BoredState();
         bored.AddTransition(Transition.LowHealth, FSMStateID.Retreating);
         bored.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
         bored.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
         bored.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
+        //CS
         DamagedState damaged = new DamagedState();
         damaged.AddTransition(Transition.FoundRestArea, FSMStateID.Healing);
         damaged.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
+        //CS
         HealState heal = new HealState();
         heal.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
 
+
+        //CS
         CampState camp = new CampState();
         camp.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         camp.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
@@ -130,6 +135,7 @@ public class NPCTankController : AdvancedFSM
     /// <param name="collision"></param>
     void OnCollisionEnter(Collision collision)
     {
+        //CS
         //Reduce health
         if (collision.gameObject.tag == "Bullet" && !invincible)
         {

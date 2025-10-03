@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//CS
 public class CampState : FSMState
 {
     public CampState() 
@@ -36,6 +37,7 @@ public class CampState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
+        npc.GetComponent<Renderer>().material.color = Color.black; //CS
         //Do Nothing for the camp state
     }
 }

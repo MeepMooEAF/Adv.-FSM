@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//CS
 public class DamagedState : FSMState
 {
     public DamagedState() 
@@ -24,6 +25,7 @@ public class DamagedState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
+        npc.GetComponent<Renderer>().material.color = Color.red;
         Quaternion targetRotation = Quaternion.LookRotation(destPos - npc.position);
         npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime * curRotSpeed); 
         npc.Translate(Vector3.forward * Time.deltaTime * curSpeed); 

@@ -16,6 +16,7 @@ public class PatrolState : FSMState
 
     public override void Reason(Transform player, Transform npc)
     {
+        npc.GetComponent<Renderer>().material.color = Color.white; //CS
 
         //1. Check the distance with player tank
         if (Vector3.Distance(npc.position, player.position) <= 300.0f)

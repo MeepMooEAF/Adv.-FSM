@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//CS
 public class BoredState : FSMState
 {
     public BoredState() 
@@ -28,6 +29,7 @@ public class BoredState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
+        npc.GetComponent<Renderer>().material.color = Color.blue;
         Transform turret = npc.GetComponent<NPCTankController>().turret;
         turret.transform.Rotate(0f, 10f, 0f, Space.Self);
     }

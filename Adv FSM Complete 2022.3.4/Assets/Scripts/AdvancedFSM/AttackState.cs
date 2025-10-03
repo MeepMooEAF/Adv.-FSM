@@ -40,6 +40,7 @@ public class AttackState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
+        npc.GetComponent<Renderer>().material.color = Color.magenta; //CS
         //Set the target position as the player position
         destPos = player.position;
 

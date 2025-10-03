@@ -38,6 +38,8 @@ public class ChaseState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
+        npc.GetComponent<Renderer>().material.color = Color.yellow; //CS
+
         //Rotate to the target point
         destPos = player.position;
 
